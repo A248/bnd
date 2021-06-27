@@ -2666,7 +2666,11 @@ public class Analyzer extends Processor {
 						// If there is a mismatch we
 						// warning
 						if (okToIncludeDirs) { // assume already reported
-							mismatched.put(clazz.getAbsolutePath(), clazz);
+							// Ignore multi-release directories. #2227
+							String absolutePath = clazz.getAbsolutePath();
+							if (!absolutePath.startsWith("META-INF/versions/") {
+								mismatched.put(absolutePath, clazz);
+							}
 						}
 						continue next;
 					}
